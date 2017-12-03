@@ -1,0 +1,30 @@
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    width: 500px;
+}
+
+.panel-body {
+    padding-top: 30px;
+}
+
+.errorMessage {
+    list-style-type: none;
+    font-weight: bold;
+    color: red;
+}
+
+.errorBox {
+    margin-top: 25px;
+}
+
+.mainbox {
+    margin-top: 50px;
+}
+.form-group {
+    margin-bottom: 0px;
+}
+
+

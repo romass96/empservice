@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+    <package name="struts" namespace="/" extends="struts-default">
+        <interceptors>
+            <interceptor name="authentication"
+                         class="com.employeeservice.interceptors.AuthenticationInterceptor"></interceptor>
+            <interceptor-stack name="authStack">
+                <interceptor-ref name="authentication"></interceptor-ref>
+                <interceptor-ref name="defaultStack"></interceptor-ref>
+            </interceptor-stack>
+        </interceptors>
+
+        <global-results>
+            <result name="login" type="redirect">/loginPage</result>
+            <result name="afterLogin" type="redirect">${target}</result>
+        </global-results>
+
+        <action name="loginPage">
+            <result>/content/login.jsp</result>
+        </action>
+
+        <action name="">
+            <result type="redirect">/loginPage</result>
+        </action>
+
+        <action name="ordersPage" class="com.employeeservice.actions.OrderAction">
+            <interceptor-ref name="authStack"></interceptor-ref>
+            <result name="success">/content/orders.jsp</result>
+        </action>
+
+        <action name="login" class="com.employeeservice.actions.LoginAction">
+            <result name="success" type="redirect">/ordersPage</result>
+            <result name="input">/content/login.jsp</result>
+        </action>
+
+        <action name="logout" class="com.employeeservice.actions.LoginAction" method="logout">
+            <result name="LOGOUT" type="redirect">/loginPage</result>
+        </action>
+
+        <action name="addOrder" class="com.employeeservice.actions.OrderAction" method="addOrder">
+            <interceptor-ref name="authStack"></interceptor-ref>
+            <result name="success" type="redirect">/ordersPage</result>
+            <result name="input">/content/orders.jsp</result>
+        </action>
+
+        <action name="statisticsPage" class="com.employeeservice.actions.StatAction">
+            <interceptor-ref name="authStack"></interceptor-ref>
+            <result name="success">/content/statistics.jsp</result>
+        </action>
+    </package>
+
+    <package name="ajax" extends="json-default">
+        <action name="sendOrdersCount" class="com.employeeservice.actions.StatAction" method="sendOrdersCount">
+            <result type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="noCache">true</param>
+            </result>
+        </action>
+    </package>
+
+</struts>

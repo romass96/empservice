@@ -1,0 +1,32 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+        "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+
+<validators>
+    <field name="order.employee.login">
+        <field-validator type="requiredstring">
+            <message>Поле 'Сотрудник' не должно быть пустым</message>
+        </field-validator>
+    </field>
+    <field name="order.region.id">
+        <field-validator type="required">
+            <message>Поле 'Регион' не должно быть пустым</message>
+        </field-validator>
+    </field>
+    <field name="order.price">
+        <field-validator type="required">
+            <message>Поле 'Сумма заказа' не должно быть пустым</message>
+        </field-validator>
+        <field-validator type="int">
+            <param name="min">1</param>
+            <message>Сумма заказа должна быть больше 0</message>
+        </field-validator>
+    </field>
+    <field name="order.orderDate">
+        <field-validator type="required">
+            <message>Поле 'Дата' не должно быть пустым</message>
+        </field-validator>
+        <field-validator type="date">
+            <message>Поле 'Дата' должно содержать коректную дату</message>
+        </field-validator>
+    </field>
+</validators>
